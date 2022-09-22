@@ -2,7 +2,7 @@
 import Joi from "joi";
 // import { join } from "path";
 
-const   interviewSchemaValidation = Joi.object({
+const interviewSchemaValidation = Joi.object({
   candidateId: Joi.string().lowercase().required(),
   interviewer: Joi.array().items(Joi.string()).required(),
   hr: Joi.array().items(Joi.string()).required(),
@@ -12,4 +12,14 @@ const   interviewSchemaValidation = Joi.object({
   isDeleted: Joi.boolean(),
 });
 
-export default interviewSchemaValidation;
+const updateInterviewSchemaValidation = Joi.object({
+  candidateId: Joi.string().lowercase(),
+  interviewer: Joi.array().items(Joi.string()),
+  hr: Joi.array().items(Joi.string()),
+  organizationId: Joi.string().lowercase(),
+  interviewDate: Joi.date(),
+  interviewTime: Joi.string(),
+  isDeleted: Joi.boolean(),
+});
+
+export default { interviewSchemaValidation, updateInterviewSchemaValidation };

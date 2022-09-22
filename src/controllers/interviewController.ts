@@ -12,6 +12,7 @@ const addInterview = async (req: Request, res: Response) => {
     return res.status(500).json(error);
   }
 };
+
 const deleteInterview = async (req: Request, res: Response) => {
   const { interviewId } = req.params;
   try {
@@ -63,11 +64,24 @@ const updateInterview = async (req: Request, res: Response) => {
   }
 };
 
+const fetchOneInterview = async (req: Request, res: Response) => {
+  const { interviewId } = req.params;
+
+  try {
+    const interview = await Interview.findById(interviewId).select("-_id");
+
+    if (!interview) {
+      res.status(400).send(`Interview with id ${interviewId} not found`);
+    }
+
+    res.status(200).json(interview);
+  } catch (error) {}
+};
 
 export default {
   addInterview,
   deleteInterview,
   updateInterview,
   fetchInterview,
-  // fetchOneInterview,
+  fetchOneInterview,
 };

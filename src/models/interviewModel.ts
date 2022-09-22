@@ -35,8 +35,8 @@ const interviewSchema = new Schema(
       required: true,
       trim: true,
     },
-    feedback:{
-      type:String,
+    feedback: {
+      type: String,
     },
     isDeleted: {
       type: Boolean,
